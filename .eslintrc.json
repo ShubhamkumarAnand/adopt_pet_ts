@@ -1,9 +1,9 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugins: import/errors",
-    "plugins: react/recommended",
-    "plugins: jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
     "prettier"
   ],
   "rules": {
@@ -13,7 +13,7 @@
   "plugins": [
     "react",
     "import",
-    "jsx-ally"
+    "jsx-a11y"
   ],
   "parserOptions": {
     "ecmaVersion": 2022,
