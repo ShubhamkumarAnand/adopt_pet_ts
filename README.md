@@ -1,4 +1,4 @@
-# Pet Adoption Website
+# Adopt Pet - Typescript React App
 
 You can select a list of the animal and their breed and adopt them as per your Like
 
@@ -13,8 +13,6 @@ To Run this React-18 Application on your own Machine
 2. Run the Application in Development Mode
 
     - `npm run dev`
-
-![Pet Adopt - Homepage](/Github/Pet%20Adopt%20-%20HomePage.png)
 
 ## Package Json File
 
