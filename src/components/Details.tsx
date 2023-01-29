@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom"
 
 import AdoptedCreateContext from "../context/AdoptedPetContext"
-import { PetAPIResponse } from "../utils/APIResponsesTypes"
 import fetchPet from "../utils/fetchPet"
 import Carousel from "./Carousel"
 import ErrorBoundary from "./ErrorBoundary"
@@ -14,7 +13,7 @@ const Details = () => {
   if (!id) {
     throw new Error("why didn't you provide me an id?")
   }
-  const results = useQuery<PetAPIResponse>(["details", id], fetchPet)
+  const results = useQuery(["details", id], fetchPet)
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
