@@ -3,18 +3,22 @@ import { useQuery } from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom"
 
 import AdoptedCreateContext from "../context/AdoptedPetContext"
+import { PetAPIResponse } from "../utils/APIResponsesTypes"
 import fetchPet from "../utils/fetchPet"
 import Carousel from "./Carousel"
 import ErrorBoundary from "./ErrorBoundary"
 import Modal from "./Modal"
 
 const Details = () => {
+  const { id } = useParams()
+  if (!id) {
+    throw new Error("why didn't you provide me an id?")
+  }
+  const results = useQuery<PetAPIResponse>(["details", id], fetchPet)
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptedCreateContext)
-  const { id } = useParams()
-  const results = useQuery(["details", id], fetchPet)
 
   if (results.isLoading) {
     return (
@@ -24,7 +28,11 @@ const Details = () => {
     )
   }
 
-  const pet = results.data.pets[0]
+  const pet = results?.data?.pets[0]
+  if (!pet) {
+    throw new Error("No Pet found")
+  }
+
   return (
     <div className="details">
       <Carousel images={pet.images} />
@@ -60,10 +68,10 @@ const Details = () => {
   )
 }
 
-function DetailsErrorBoundary(props) {
+function DetailsErrorBoundary() {
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <Details />
     </ErrorBoundary>
   )
 }
