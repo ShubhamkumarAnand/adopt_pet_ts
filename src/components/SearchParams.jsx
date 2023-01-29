@@ -1,41 +1,39 @@
-import { useState, useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useContext, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 
-import Results from "./Results";
+import AdoptedPetContext from "../context/AdoptedPetContext"
+import fetchSearch from "../utils/fetchSearch"
+import useBreedList from "../utils/useBreedList"
+import Results from "./Results"
 
-import useBreedList from "../utils/useBreedList";
-import fetchSearch from "../utils/fetchSearch";
-
-import AdoptedPetContext from "../context/AdoptedPetContext";
-
-const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
+const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"]
 
 const SearchParams = () => {
   const [requestParams, setRequestParams] = useState({
     location: "",
     animal: "",
     breed: "",
-  });
-  const [animal, setAnimal] = useState("");
-  const [breeds] = useBreedList(animal);
+  })
+  const [animal, setAnimal] = useState("")
+  const [breeds] = useBreedList(animal)
 
-  const [adoptedPet] = useContext(AdoptedPetContext);
+  const [adoptedPet] = useContext(AdoptedPetContext)
 
-  const results = useQuery(["search", requestParams], fetchSearch);
-  const pets = results?.data?.pets ?? [];
+  const results = useQuery(["search", requestParams], fetchSearch)
+  const pets = results?.data?.pets ?? []
 
   return (
     <div className="search-params">
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          const formData = new FormData(e.target);
+          e.preventDefault()
+          const formData = new FormData(e.target)
           const obj = {
             animal: formData.get("animal") ?? "",
             location: formData.get("location") ?? "",
             breed: formData.get("breed") ?? "",
-          };
-          setRequestParams(obj);
+          }
+          setRequestParams(obj)
         }}
       >
         {adoptedPet ? (
@@ -53,10 +51,10 @@ const SearchParams = () => {
             id="animal"
             value={animal}
             onChange={(e) => {
-              setAnimal(e.target.value);
+              setAnimal(e.target.value)
             }}
             onBlur={(e) => {
-              setAnimal(e.target.value);
+              setAnimal(e.target.value)
             }}
           >
             <option />
@@ -82,7 +80,7 @@ const SearchParams = () => {
       </form>
       <Results pets={pets} />
     </div>
-  );
-};
+  )
+}
 
-export default SearchParams;
+export default SearchParams

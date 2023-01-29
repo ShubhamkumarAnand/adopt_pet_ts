@@ -1,4 +1,4 @@
-import Pet from "./Pet";
+import Pet from "./Pet"
 
 const Results = ({ pets }) => {
   return (
@@ -17,11 +17,11 @@ const Results = ({ pets }) => {
               location={`${pet.city}, ${pet.state}`}
               key={pet.id}
             />
-          );
+          )
         })
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Results;
+export default Results

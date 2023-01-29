@@ -1,15 +1,15 @@
-import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Component } from "react"
+import { Link } from "react-router-dom"
 
 class ErrorBoundary extends Component {
-  state = { hasError: false };
+  state = { hasError: false }
   static getDerivedStateFromError() {
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error, info) {
     // TrackJs or NewRelic
-    console.error("ErrorBoundary component caught an Error", error, info);
+    console.error("ErrorBoundary component caught an Error", error, info)
   }
 
   render() {
@@ -21,10 +21,10 @@ class ErrorBoundary extends Component {
             <Link to="/">Click Here to Go Back to Home Page</Link>
           </h2>
         </div>
-      );
+      )
     }
-    return this.props.children;
+    return this.props.children
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundary
